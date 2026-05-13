@@ -59,7 +59,8 @@ prophet_df.columns = ['ds', 'y']
 model = Prophet()
 model.fit(prophet_df)
 
-future = model.make_future_dataframe(periods=30)
+#future = model.make_future_dataframe(periods=30)
+future = model.make_future_dataframe(periods=forecast_periods, freq='MS')
 
 forecast = model.predict(future)
 
