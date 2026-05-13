@@ -40,7 +40,7 @@ prophet_df.columns = ['ds', 'y']
 model = Prophet()
 model.fit(prophet_df)
 
-future = model.make_future_dataframe(periods=300)
+future = model.make_future_dataframe(periods=30)
 
 forecast = model.predict(future)
 
