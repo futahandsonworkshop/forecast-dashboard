@@ -10,7 +10,9 @@ st.title("Disease Forecast Dashboard")
 df = pd.read_csv("dataset for workshop.csv")
 
 # Convert date column
-df['date'] = pd.to_datetime(df['date'])
+#df['date'] = pd.to_datetime(df['date'])
+df['date'] = pd.to_datetime(df['date'], errors='coerce')
+df = df.dropna(subset=['date'])
 
 # Show dataset
 st.subheader("Dataset Preview")
