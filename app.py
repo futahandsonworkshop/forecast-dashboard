@@ -1,0 +1,51 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from prophet import Prophet
+
+# Dashboard title
+st.title("Disease Forecast Dashboard")
+
+# Load dataset
+df = pd.read_csv("dataset for workshop.csv")
+
+# Convert date column
+df['date'] = pd.to_datetime(df['date'])
+
+# Show dataset
+st.subheader("Dataset Preview")
+st.write(df.head())
+
+# Plot disease cases
+st.subheader("Disease Cases Trend")
+
+fig, ax = plt.subplots(figsize=(10,5))
+
+ax.plot(df['date'], df['disease_cases'])
+
+ax.set_xlabel("Date")
+ax.set_ylabel("Disease Cases")
+ax.set_title("Disease Cases Over Time")
+
+st.pyplot(fig)
+
+# Prophet Forecasting
+st.subheader("Facebook Prophet Forecast")
+
+prophet_df = df[['date', 'disease_cases']]
+prophet_df.columns = ['ds', 'y']
+
+model = Prophet()
+model.fit(prophet_df)
+
+future = model.make_future_dataframe(periods=300)
+
+forecast = model.predict(future)
+
+fig2 = model.plot(forecast)
+
+st.pyplot(fig2)
+
+# Show forecast table
+st.subheader("Forecast Output")
+st.write(forecast[['ds', 'yhat']].tail())
