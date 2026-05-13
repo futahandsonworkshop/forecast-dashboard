@@ -9,6 +9,25 @@ st.title("Disease Forecast Dashboard")
 # Load dataset
 df = pd.read_csv("dataset for workshop.csv")
 
+st.sidebar.header("Forecast Settings")
+
+forecast_unit = st.sidebar.selectbox(
+    "Forecast by:",
+    ["Months", "Years"]
+)
+
+forecast_value = st.sidebar.number_input(
+    f"Number of {forecast_unit.lower()} to forecast:",
+    min_value=1,
+    max_value=10 if forecast_unit == "Years" else 120,
+    value=12 if forecast_unit == "Months" else 1
+)
+
+if forecast_unit == "Years":
+    forecast_periods = forecast_value * 12
+else:
+    forecast_periods = forecast_value
+  
 # Convert date column
 #df['date'] = pd.to_datetime(df['date'])
 df['date'] = pd.to_datetime(df['date'], errors='coerce')
