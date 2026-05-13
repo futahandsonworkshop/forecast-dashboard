@@ -37,18 +37,6 @@ df = df.dropna(subset=['date'])
 st.subheader("Dataset Preview")
 st.write(df.head())
 
-# Plot disease cases
-st.subheader("Disease Cases Trend")
-
-fig, ax = plt.subplots(figsize=(10,5))
-
-ax.plot(df['date'], df['disease_cases'])
-
-ax.set_xlabel("Date")
-ax.set_ylabel("Disease Cases")
-ax.set_title("Disease Cases Over Time")
-
-st.pyplot(fig)
 
 # Prophet Forecasting
 st.subheader("Facebook Prophet Forecast")
