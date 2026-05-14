@@ -9,7 +9,7 @@ st.title("Disease Forecast Dashboard")
 # Load dataset
 df = pd.read_csv("dataset for workshop.xls")
 
-st.sidebar.header("Forecast Settings")
+st.sidebar.header("Ibrahim Forecast Settings")
 
 forecast_unit = st.sidebar.selectbox(
     "Forecast by:",
